@@ -310,14 +310,24 @@ public class JsonUtil {
 
     Track track = new Track();
 
-    track.setAlbum(createSimpleAlbum(trackJson.getJSONObject("album")));
-    track.setArtists(createSimpleArtists(trackJson.getJSONArray("artists")));
-    track.setAvailableMarkets(createAvailableMarkets(trackJson.getJSONArray("available_markets")));
+    if (existsAndNotNull("album", trackJson)) {
+    	track.setAlbum(createSimpleAlbum(trackJson.getJSONObject("album")));
+    }
+    if (existsAndNotNull("artists", trackJson)) {
+    	track.setArtists(createSimpleArtists(trackJson.getJSONArray("artists")));
+    }
+    if (existsAndNotNull("available_markets", trackJson)) {
+    	track.setAvailableMarkets(createAvailableMarkets(trackJson.getJSONArray("available_markets")));
+    }
     track.setDiscNumber(trackJson.getInt("disc_number"));
     track.setDuration(trackJson.getInt("duration_ms"));
     track.setExplicit(trackJson.getBoolean("explicit"));
-    track.setExternalIds(createExternalIds(trackJson.getJSONObject("external_ids")));
-    track.setExternalUrls(createExternalUrls(trackJson.getJSONObject("external_urls")));
+    if (existsAndNotNull("external_ids", trackJson)) {
+    	track.setExternalIds(createExternalIds(trackJson.getJSONObject("external_ids")));
+    }
+    if (existsAndNotNull("external_urls", trackJson)) {
+    	track.setExternalUrls(createExternalUrls(trackJson.getJSONObject("external_urls")));
+    }
     track.setHref(trackJson.getString("href"));
     track.setId(trackJson.getString("id"));
     track.setName(trackJson.getString("name"));
