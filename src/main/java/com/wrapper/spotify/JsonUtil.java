@@ -319,9 +319,15 @@ public class JsonUtil {
     if (existsAndNotNull("available_markets", trackJson)) {
     	track.setAvailableMarkets(createAvailableMarkets(trackJson.getJSONArray("available_markets")));
     }
-    track.setDiscNumber(trackJson.getInt("disc_number"));
-    track.setDuration(trackJson.getInt("duration_ms"));
-    track.setExplicit(trackJson.getBoolean("explicit"));
+    if (existsAndNotNull("disc_number", trackJson)) {
+    	track.setDiscNumber(trackJson.getInt("disc_number"));
+    }
+    if (existsAndNotNull("duration_ms", trackJson)) {
+    	track.setDuration(trackJson.getInt("duration_ms"));
+    }
+    if (existsAndNotNull("explicit", trackJson)) {
+    	track.setExplicit(trackJson.getBoolean("explicit"));
+    }
     if (existsAndNotNull("external_ids", trackJson)) {
     	track.setExternalIds(createExternalIds(trackJson.getJSONObject("external_ids")));
     }
@@ -333,7 +339,9 @@ public class JsonUtil {
     track.setName(trackJson.getString("name"));
     track.setPopularity(trackJson.getInt("popularity"));
     track.setPreviewUrl(trackJson.getString("preview_url"));
-    track.setTrackNumber(trackJson.getInt(("track_number")));
+    if (existsAndNotNull("track_number", trackJson)) {
+    	track.setTrackNumber(trackJson.getInt(("track_number")));
+    }
     track.setType(createSpotifyEntityType(trackJson.getString("type")));
     track.setUri(trackJson.getString("uri"));
 
