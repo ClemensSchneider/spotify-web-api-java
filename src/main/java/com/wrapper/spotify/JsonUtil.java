@@ -334,16 +334,30 @@ public class JsonUtil {
     if (existsAndNotNull("external_urls", trackJson)) {
     	track.setExternalUrls(createExternalUrls(trackJson.getJSONObject("external_urls")));
     }
-    track.setHref(trackJson.getString("href"));
-    track.setId(trackJson.getString("id"));
-    track.setName(trackJson.getString("name"));
-    track.setPopularity(trackJson.getInt("popularity"));
-    track.setPreviewUrl(trackJson.getString("preview_url"));
+    if (existsAndNotNull("href", trackJson)) {
+    	track.setHref(trackJson.getString("href"));
+    }
+    if (existsAndNotNull("id", trackJson)) {
+    	track.setId(trackJson.getString("id"));
+    }
+    if (existsAndNotNull("name", trackJson)) {
+    	track.setName(trackJson.getString("name"));
+    }
+    if (existsAndNotNull("popularity", trackJson)) {
+    	track.setPopularity(trackJson.getInt("popularity"));
+    }
+    if (existsAndNotNull("preview_url", trackJson)) {
+    	track.setPreviewUrl(trackJson.getString("preview_url"));
+    }
     if (existsAndNotNull("track_number", trackJson)) {
     	track.setTrackNumber(trackJson.getInt(("track_number")));
     }
-    track.setType(createSpotifyEntityType(trackJson.getString("type")));
-    track.setUri(trackJson.getString("uri"));
+    if (existsAndNotNull("type", trackJson)) {
+    	track.setType(createSpotifyEntityType(trackJson.getString("type")));
+    }
+    if (existsAndNotNull("uri", trackJson)) {
+    	track.setUri(trackJson.getString("uri"));
+    }
 
     return track;
   }
